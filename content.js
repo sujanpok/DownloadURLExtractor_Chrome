@@ -1,14 +1,25 @@
 // content.js
-// Collect all downloadable URLs from the page
+// Collect all downloadable URLs from the page, excluding specific domains
 
 function collectDownloadableUrls() {
   const urls = new Set();
+  const excludedDomains = ['watch-movies.com.pk', 'googleapis.com', 'google.com', 'gstatic.com']; // Add domains to exclude
+
+  // Function to check if URL should be excluded
+  function isExcluded(url) {
+    try {
+      const urlObj = new URL(url);
+      return excludedDomains.some(domain => urlObj.hostname.includes(domain));
+    } catch (e) {
+      return false; // Invalid URL, exclude
+    }
+  }
 
   // Collect href from <a> tags
   const links = document.querySelectorAll('a[href]');
   links.forEach(link => {
     const href = link.href;
-    if (href && href.startsWith('http')) {
+    if (href && href.startsWith('http') && !isExcluded(href)) {
       urls.add(href);
     }
   });
@@ -17,7 +28,7 @@ function collectDownloadableUrls() {
   const srcElements = document.querySelectorAll('img[src], script[src], link[href], video[src], audio[src], iframe[src]');
   srcElements.forEach(element => {
     const src = element.src || element.href;
-    if (src && src.startsWith('http')) {
+    if (src && src.startsWith('http') && !isExcluded(src)) {
       urls.add(src);
     }
   });
