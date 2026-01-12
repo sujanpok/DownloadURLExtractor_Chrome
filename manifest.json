@@ -1,0 +1,20 @@
+{
+  "manifest_version": 3,
+  "name": "Download URL Extractor",
+  "version": "1.0",
+  "description": "Extracts and displays all downloadable URLs from the current webpage.",
+  "permissions": [
+    "activeTab",
+    "scripting"
+  ],
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Extract Download URLs"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"]
+    }
+  ]
+}
