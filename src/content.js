@@ -1,9 +1,8 @@
 // content.js
 // Collect all downloadable URLs from the page, excluding specific domains
 
-function collectDownloadableUrls() {
+function collectDownloadableUrls(excludedDomains = []) {
   const urls = new Set();
-  const excludedDomains = ['watch-movies.com.pk', 'googleapis.com', 'google.com', 'gstatic.com']; // Add domains to exclude
 
   // Function to check if URL should be excluded
   function isExcluded(url) {
@@ -42,7 +41,7 @@ function collectDownloadableUrls() {
 // Send the URLs to the popup when requested
 chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
   if (request.action === 'getUrls') {
-    const urls = collectDownloadableUrls();
+    const urls = collectDownloadableUrls(request.excludedDomains || []);
     sendResponse({ urls: urls });
   }
 });

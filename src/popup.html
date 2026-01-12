@@ -9,9 +9,12 @@
     li { margin-bottom: 5px; }
     a { display: block; text-decoration: none; color: blue; word-break: break-all; }
     button { margin-bottom: 10px; }
+    input { width: 100%; margin-bottom: 10px; }
   </style>
 </head>
 <body>
+  <label for="excludeInput">Exclude Domains (comma-separated):</label>
+  <input type="text" id="excludeInput" placeholder="e.g., google.com, example.com">
   <button id="extractBtn">Extract URLs</button>
   <ul id="urlList"></ul>
   <script src="popup.js"></script>

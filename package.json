@@ -1,0 +1,11 @@
+{
+  "name": "download-url-extractor-chrome",
+  "version": "1.0.0",
+  "description": "Chrome extension to extract downloadable URLs from web pages",
+  "scripts": {
+    "build": "mkdir dist && copy manifest.json dist\\ && xcopy src dist\\src /E /I",
+    "clean": "rmdir /S /Q dist"
+  },
+  "author": "sujanpok",
+  "license": "MIT"
+}
